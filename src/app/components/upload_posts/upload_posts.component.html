@@ -1,0 +1,34 @@
+<div id="upload_posts">
+  <mat-card style="padding: 24px;">
+    <h3>Upload post!</h3>
+    <div [formGroup]="form" fxLayout="column">
+
+      <div class="row" fxLayoutAlign="start start">
+        <button mat-raised-button color="primary" [disabled]="uploadResponse.status === 'progress'" type="button"
+          (click)="fileInput.click()">
+          Search file
+        </button>
+      </div>
+
+      <input #fileInput style="display: none;" mat-button type="file" class="mat-button" name="file" id="file"
+        (change)="onFileChange($event)">
+      <div *ngIf="form.get('file').value !== ''">
+        <img src="{{form.get('file').value}}" style="width: 50%; height: 50%;">
+      </div>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" columns="1" max-rows="4" cdkTextareaAutosize></textarea>
+        <mat-error>Invalid description!</mat-error>
+      </mat-form-field>
+
+      <div class="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" [disabled]="form.invalid" style="margin-right: 5px;"
+          (click)="sendFiles();">Upload
+          post!</button>
+        <button mat-raised-button color="accent" [routerLink]="['/home/posts']">Back to posts!</button>
+      </div>
+    </div>
+  </mat-card>
+</div>
